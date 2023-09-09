@@ -4,6 +4,7 @@
 //
 //  Created by matt on 9/9/23.
 //
+//
 
 #include "rectangleOverlap.hpp"
 
@@ -25,7 +26,7 @@ void Rectangle::rotate(double const r){
     double cosAngle = cos(r * M_PI / 180);
     double sinAngle = sin(r * M_PI / 180);
     
-    for (int i = 0; i < 4; i++){
+    for (int i = 0; i < 4; i++){ // For each vertex
         double x1 = m_vertices[i].x - m_xCenter;
         double y1 = m_vertices[i].y - m_yCenter;
         
@@ -37,8 +38,15 @@ void Rectangle::rotate(double const r){
     }
 };
 
-// Each rectangle has two slopes, perpendicular to each other. We call them the nominal slope and the ortho slope.
+// Each rectangle has two slopes which are mutually perpendicular. We call the
+// non-negative finite one the "nominal" slope of the rectangle. We call the
+// other one, which is either +inf or a negative finite number the "ortho" slope.
 // The nominal slope is guaranteed to be finite and non-negative.
+// Each rectangle slope m implies a projection axis.
+// A finite slope m implies the projection axis (1,m).
+// If slope m is infinite, then m implies the projection axis (0,1).
+// If the rectangles have equal slope, i.e., if they are parallel, only two axes need be considered.
+// If the rectangles' slopes differ, four axes must be considered.
 enum slopeKind {nominal=0, ortho=1};
 
 Rectangle::Rectangle(const double x, const double y, const double w, const double h, const double r){
@@ -146,12 +154,15 @@ void Rectangle::computeSlopes(){
 };
 
 bool Rectangle::disjunct(const Extrema (&extrema)[2]) const {
-    // The array that is passed in, extrema, represent the projection of another rectangle's vertices
+    // The array that is passed in, extrema, represents the projection of another rectangle's vertices
     // onto the axes of this rectangle. We compare extrema[nominal] and extrema[ortho] with the
-    // corresponding members of this rectangle to check for overlap. Conceptually, we're computing
+    // corresponding members of this rectangle to check for overlap. For every projection axis, we compute
     //          bool disjunct = max2 < min1 || max1 < min2
-    // on both nominal and ortho axes where 1 and 2 represent the two rectangles's projections
-    for (auto i = 0; i < 2; i++){
+    // where 1 and 2 refer to the two rectangles.
+    // The min and max refer to the extrema of the projections of the vertices of the rectangles
+    // onto a specific axis. Input array extrema[2] has dimension 2 representing nominal and ortho axes.
+
+    for (int i = nominal; i <= ortho; i++){
         if (m_extrema[i].max < extrema[i].min)   return true;
         if (extrema[i].max   < m_extrema[i].min) return true;
     };
