@@ -8,6 +8,14 @@
 
 //  How to build example:
 //    g++ -std=c++17 -o rectangleOverlap  rectangleOverlap.cpp main.cpp
+//
+//  You can run this from the command line by following instructions in "usage" below.
+//  You can run with plotting using the Python test harness distributed with this software
+//  After building the C++ executable as shown above, edit the Python source to point
+//  the "path" variable to your executable. Then just run the Python program and it
+//  will execute a series of test cases, which you can add to.
+//
+
 
 #include "rectangleOverlap.hpp"
 #include <iostream>
@@ -20,7 +28,6 @@ void usage() {
     std::cout << " w1 = width of rectangle 1\n";
     std::cout << " h1 = height of rectangle 1\n";
     std::cout << " rotation angle in degrees of rectangle 1\n";
-    
     std::cout << " (x2,y2) = center of rectangle 2\n";
     std::cout << " w2 = width of rectangle 2\n";
     std::cout << " h2 = height of rectangle 2\n";
