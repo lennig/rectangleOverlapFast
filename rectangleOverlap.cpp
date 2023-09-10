@@ -195,18 +195,13 @@ bool Rectangle::separated(const Rectangle& rect) const {
         Extrema thisExtrema[2];  // Extrema of this rectangle's vertices projected onto rect's axes
         Extrema rectExtrema[2];  // Extrema of rect's vertices projected onto this rectangle's axes
         
-        for (auto i = 0; i<2; i++){ // For nominal & ortho axes
-            // Project this rectangle's vertices on rect's axis
-            thisExtrema[i] = projectionExtrema(rect.m_slope[i]);
-            // Project rect's vertices on this rectangle's axis
-            rectExtrema[i] = rect.projectionExtrema(m_slope[i]);
+        for (int i = NOMINAL; i <= ORTHO; i++){ // For nominal & ortho axes
+            thisExtrema[i] = projectionExtrema(rect.m_slope[i]);  // Project this rectangle's vertices on rect's axis
+            rectExtrema[i] = rect.projectionExtrema(m_slope[i]);  // Project rect's vertices on this rectangle's axis
         }
 
-        // Check projection of this rectangle's vertices onto rect's axes
-        if (disjunct(rectExtrema)) return true;
-        
-        // Check projection of rect's vertices on this rectangle's axes
-        if (rect.disjunct(thisExtrema)) return true;
+        if (disjunct(rectExtrema)) return true;     // Check projection of this rectangle's vertices onto rect's axes
+        if (rect.disjunct(thisExtrema)) return true;  // Check projection of rect's vertices on this rectangle's axes
 
         // Rectangles' projections are overlapped on every axis
         return false;
