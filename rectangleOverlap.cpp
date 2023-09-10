@@ -47,6 +47,7 @@ void Rectangle::rotate(double const r){
 // If slope m is infinite, then m implies the projection axis (0,1).
 // If the rectangles have equal slope, i.e., if they are parallel, only two axes need be considered.
 // If the rectangles' slopes differ, four axes must be considered.
+
 enum slopeKind {nominal=0, ortho=1};
 
 Rectangle::Rectangle(const double x, const double y, const double w, const double h, const double r){
@@ -79,14 +80,14 @@ Rectangle::Rectangle(const double x, const double y, const double w, const doubl
 };
 
 Extrema Rectangle::projectionExtrema(double const theSlope) const {
-    // Projects this rectangle's vertices onto the projection axis implied by theSlope. The implied
-    // projection axis is either (1, theSlope) if theSlope is finite, or the implied
-    // projection axis is (0,1) if theSlope is infinite.
+    // Project this rectangle's vertices onto the projection axis implied by theSlope.
+    // If theSlope is finite,   the implied projection axis is (1, theSlope).
+    // If theSlope is infinite, the implied projection axis is (0, 1).
     
-    // Computes the minimum and maximum of the projections of this rectangle's vertices
+    // Compute the minimum and maximum of the projections of this rectangle's vertices
     // onto the axis implied by theSlope.
 
-    // Returns the min and max as an Extrema object.
+    // Return the min and max as an Extrema object.
     
     Extrema extrema;        // Will hold return value
     
