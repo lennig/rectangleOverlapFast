@@ -48,7 +48,7 @@ void Rectangle::rotate(double const r){
 // If the rectangles have equal slope, i.e., if they are parallel, only two axes need be considered.
 // If the rectangles' slopes differ, four axes must be considered.
 
-enum slopeKind {nominal=0, ortho=1};
+enum slopeKind {NOMINAL=0, ORTHO=1};
 
 Rectangle::Rectangle(const double x, const double y, const double w, const double h, const double r){
     // Make a rectangle given center (x,y), width w, height h, and rotation angle r in degrees
@@ -75,8 +75,8 @@ Rectangle::Rectangle(const double x, const double y, const double w, const doubl
     // Compute the min and max projections (extrema) of this rectangle's vertices onto the each
     // of its own two axes. We name these projection axes the nominal axis and the ortho axis,
     // corresponding to the nominal and ortho slopes.
-    m_extrema[nominal] = projectionExtrema(m_slope[nominal]);
-    m_extrema[ortho]   = projectionExtrema(m_slope[ortho]);
+    m_extrema[NOMINAL] = projectionExtrema(m_slope[NOMINAL]);
+    m_extrema[ORTHO]   = projectionExtrema(m_slope[ORTHO]);
 };
 
 Extrema Rectangle::projectionExtrema(double const theSlope) const {
@@ -136,21 +136,21 @@ void Rectangle::computeSlopes(){
     if (p1.x - p2.x != 0) {
         double m = (p1.y - p2.y) / (p1.x - p2.x);
         if (m == 0){
-            m_slope[nominal] = 0;
-            m_slope[ortho] = std::numeric_limits<double>::infinity();
+            m_slope[NOMINAL] = 0;
+            m_slope[ORTHO] = std::numeric_limits<double>::infinity();
         }
         else if (m > 0) {
-            m_slope[nominal] = m;
-            m_slope[ortho] = -1/m;
+            m_slope[NOMINAL] = m;
+            m_slope[ORTHO] = -1/m;
         }
         else{
-            m_slope[nominal] = -1/m;
-            m_slope[ortho] = m;
+            m_slope[NOMINAL] = -1/m;
+            m_slope[ORTHO] = m;
         };
     }
     else{
-        m_slope[nominal] = 0;
-        m_slope[ortho] = std::numeric_limits<double>::infinity();
+        m_slope[NOMINAL] = 0;
+        m_slope[ORTHO] = std::numeric_limits<double>::infinity();
     }
 };
 
@@ -163,7 +163,7 @@ bool Rectangle::disjunct(const Extrema (&extrema)[2]) const {
     // The min and max refer to the extrema of the projections of the vertices of the rectangles
     // onto a specific axis. Input array extrema[2] has dimension 2 representing nominal and ortho axes.
 
-    for (int i = nominal; i <= ortho; i++){
+    for (int i = NOMINAL; i <= ORTHO; i++){
         if (m_extrema[i].max < extrema[i].min)   return true;
         if (extrema[i].max   < m_extrema[i].min) return true;
     };
@@ -184,7 +184,7 @@ bool Rectangle::separated(const Rectangle& rect) const {
     // Return false only after having checked every axis for separation and verified
     // that separated was always false.
 
-    if (m_slope[nominal] == rect.m_slope[nominal]){
+    if (m_slope[NOMINAL] == rect.m_slope[NOMINAL]){
         // Case where the two rectangles have the same slope
         return disjunct(rect.m_extrema);
     }
