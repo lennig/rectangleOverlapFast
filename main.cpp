@@ -63,16 +63,17 @@ int main(int argc, const char * argv[]) {
         exit(-1);
     }
     
-    // Instantiate the two rectangles rect1 & rect2
+    // Instantiate the two rectangles, rect1 and rect2
     ro::Rectangle rect1(x1,y1,w1,h1,r1);
     ro::Rectangle rect2(x2,y2,w2,h2,r2);
 
     // Compute whether the two rectangles are separated/disjunct from one another
     bool separated = rect1.separated(rect2);
+    // Alternatively, use the overloaded operator % to do the same thing:
+    // bool separated = rect1 % rect2;
 
     if (separated){
         std::cout << "Rectangles separated";
-        //a->print();
         std::cout << std::endl;
         std::cout << "\nRect1:\n";
         rect1.print();

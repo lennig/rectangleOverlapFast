@@ -83,6 +83,7 @@ private:
     double m_yCenter;
 public:
     bool separated(const Rectangle& rect) const;
+    bool operator % (const Rectangle& rect);
     Rectangle(double const x, double const y, double const w, double const h, double const r);
     void print() const;
     

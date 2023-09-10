@@ -171,6 +171,8 @@ bool Rectangle::disjunct(const Extrema (&extrema)[2]) const {
     return false;
 };
 
+bool Rectangle::operator % (const Rectangle& rect){return this->separated(rect);};
+
 bool Rectangle::separated(const Rectangle& rect) const {
     // Computes whether this rectangle is separated from Rectangle rect.
     // Separated means rectangles do not overlap.
