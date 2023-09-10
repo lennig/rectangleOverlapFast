@@ -32,11 +32,15 @@
 
 // There is a Python test harness to excercise rectangleOverlap:
 //     testHarness.py
-// The above Python script is distributed with rectangleOverlap on github
+// The above Python script is distributed with rectangleOverlapFast on github
 // Edit testHarness.py to point to your executable
 
 // This is the fast version of the algorithm. The main overlap computation requires a maximum of
 // 16 multiplications to test for overlap.
+
+// This version does not return the axis of separation. If you're interested in getting the axis
+// of separation, use the slower version here:
+//      https://github.com/lennig/rectangleOverlap
 
 // How to build example:
 // g++ -std=c++17 -o rectangleOverlap  rectangleOverlap.cpp main.cpp
@@ -60,6 +64,8 @@ public:
 };
 
 class Extrema {
+    // Class to hold the minimum and maximum resulting from the
+    // projection of a rectangle's vertices onto a projection axis
 public:
     double min;
     double max;
