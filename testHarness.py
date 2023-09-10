@@ -5,7 +5,7 @@
 #   g++ -std=c++17 -o rectangleOverlap  rectangleOverlap.cpp main.cpp
 
 # Then change the following Python line to make path point to your own executable
-path = '/Users/matt/src/viewportOverlap/rectangleOverlap2/DerivedData/rectangleOverlap2/Build/Products/Debug/rectangleOverlap2'
+path = '/Users/matt/src/viewportOverlap/rectangleOverlapFast/DerivedData/rectangleOverlapFast/Build/Products/Debug/rectangleOverlapFast'
 
 # Test cases:
 # Each test case is a list of the form 
