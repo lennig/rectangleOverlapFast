@@ -2,7 +2,6 @@
 Faster implementation of rectangleOverlap
 
 Given two rectangles in (x,y) space, computes whether or not they overlap one another.  
-If they do not overlap, optionally provides their axis of separation.
 
 **How to use:**  
 Instantiate a rectangle rect like this: 
@@ -30,7 +29,8 @@ disjunct = rect2.separated(rect1)
 returns the same value.  
 
 **Axis of Separation**  
-The fast version does not return the axis of separation
+The fast version does not return the axis of separation. If you need the axis of separation, use rectangleOverlap
+instead. It can be found here: https://github.com/lennig/rectangleOverlap
 
 **How to build example:**  
  g++ -std=c++17 -o rectangleOverlap  rectangleOverlap.cpp main.cpp  
