@@ -1,6 +1,6 @@
 # rectangleOverlapFast
 Faster implementation of rectangleOverlap
-# rectangleOverlap
+
 Given two rectangles in (x,y) space, computes whether or not they overlap one another.  
 If they do not overlap, optionally provides their axis of separation.
 
