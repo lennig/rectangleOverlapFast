@@ -28,6 +28,25 @@ disjunct = rect2.separated(rect1)
   ```
 returns the same value.  
 
+
+Equivalently, you can use the separated-from operator % for rectangles to compute whether or not two rectangles are disjunct:
+
+```
+disjunct = rect1 % rect2;         // true iff rect1 and rect2 are separated i.e. disjunct
+```
+
+
+which is always equal to 
+
+
+```
+disjunct = rect2 % rect1;        // true iff rect1 and rect2 are separated/disjunct
+```
+
+
+
+
+
 **Axis of Separation**  
 The fast version does not return the axis of separation. If you need the axis of separation, use rectangleOverlap
 instead. It can be found here: https://github.com/lennig/rectangleOverlap
